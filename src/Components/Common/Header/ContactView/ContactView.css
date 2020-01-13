@@ -1,0 +1,23 @@
+.contactViewWrapper {
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  background-color: #f93446;
+  color: white;
+  font-weight: 600;
+}
+
+.phoneView {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.contactInfoView {
+  display: block;
+  padding: 0 20px 20px 20px;
+  text-align: center;
+}

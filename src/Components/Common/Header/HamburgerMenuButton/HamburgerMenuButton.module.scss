@@ -1,0 +1,28 @@
+.hamMenuBtnWrapper {
+  height: 32px;
+  width: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px;
+  @media (min-width: 755px) {
+    display: none;
+  }
+}
+
+.hamMenuBtnLine_first {
+  transform: rotate(45deg);
+  transform-origin: top left;
+}
+
+.hamMenuBtnLine_second {
+  transform: translateX(16px);
+  opacity: 0;
+}
+
+.hamMenuBtnLine_third {
+  transform: translateX(-1px) rotate(-45deg);
+  transform-origin: top left;
+}

@@ -1,0 +1,21 @@
+.ant-menu-dark.ant-menu-submenu-popup {
+  width: -moz-available; /* WebKit-based browsers will ignore this. */
+  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  width: stretch;
+}
+
+.ant-menu-item-group-title {
+  padding: 0;
+}
+
+.ant-menu-dark .ant-menu-sub {
+  background: white !important;
+}
+
+.ant-menu-submenu-popup .submenu-title-wrapper {
+  color: red;
+}
+
+.ant-menu-submenu-placement-rightTop {
+  top: 35px !important;
+}

@@ -1,0 +1,22 @@
+.commonHeader .ant-list-header {
+  color: #ee3143;
+  border-bottom: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.commonHeader.ant-list-split .ant-list-item {
+  border-bottom: none;
+  padding-top: 0;
+  padding-bottom: 5px;
+}
+
+.dropDownContainer {
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  width: -moz-available; /* WebKit-based browsers will ignore this. */
+  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  width: stretch;
+  box-shadow: 0 7px 5px -3px gray;
+}

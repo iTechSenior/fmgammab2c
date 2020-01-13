@@ -1,0 +1,15 @@
+.menuItemWrapper {
+  width: 100%;
+  height: 50px;
+  color: white;
+  margin: auto;
+  line-height: 50px;
+  text-align: center;
+  background-color: #f93446;
+  border: 1px solid white;
+}
+
+.menuItemWrapper:hover {
+  background-color: white;
+  color: #f93446;
+}

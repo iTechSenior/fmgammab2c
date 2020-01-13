@@ -1,0 +1,25 @@
+.ant-menu-submenu-title {
+  color: white;
+  font-size: 15px;
+}
+.ant-descriptions-title {
+  color: #ee3143 !important;
+}
+
+.ant-descriptions {
+  padding-left: 21px;
+  padding-top: 21px;
+}
+
+body {
+  font-size: 15px;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,21 @@
+.ant-divider-horizontal {
+  margin: 15px 0;
+}
+
+.bikeHelpCollapse.ant-collapse > .ant-collapse-item {
+  border-bottom: none;
+}
+
+.bikeHelpCollapse.ant-collapse {
+  border: none;
+}
+
+.bikeHelpCollapse .ant-collapse-content {
+  border-top: none;
+  background-color: inherit;
+}
+
+.bikeHelpCollapse .ant-btn-circle,
+.ant-btn-circle-outline {
+  min-width: 0;
+}

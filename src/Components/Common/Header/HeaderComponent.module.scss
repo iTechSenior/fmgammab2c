@@ -1,0 +1,75 @@
+.contactRowWrapper {
+  @media (max-width: 755px) {
+    display: none;
+  }
+}
+
+.contactIconWrapper {
+  @media (min-width: 755px) {
+    display: none;
+  }
+}
+
+.contactInformation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.menuList {
+  position: absolute;
+  z-index: 1;
+  height: 0;
+  width: 100%;
+  flex-direction: column;
+  transition: height 0.3s ease;
+  background-color: #f93446;
+}
+
+.menuButtonWrapper {
+  display: 'flex';
+  flex-direction: 'row';
+  justify-content: space-between;
+  align-items: center;
+  color: 'white';
+  font-size: 18px;
+  @media (max-width: 810px) {
+    font-size: 14px;
+  }
+  @media (max-width: 755px) {
+    display: none;
+  }
+}
+
+.menuButtonWhite {
+  background-color: white !important;
+  color: red !important;
+  border-radius: unset !important;
+}
+
+.appLogoImage {
+  @media (max-width: 767px) {
+    text-align: center;
+  }
+  @media (max-width: 755px) {
+    margin-top: 30px;
+  }
+}
+
+.searchInputWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  @media (max-width: 767px) {
+    justify-content: center;
+    text-align: center;
+    padding-top: 20px;
+  }
+}
+
+.searchInput {
+  margin: 5px;
+  @media (min-width: 576px) {
+    width: 250px;
+  }
+}

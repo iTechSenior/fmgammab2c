@@ -1,0 +1,31 @@
+.bikeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 auto;
+}
+
+.redFontColor {
+  color: red;
+}
+.strikeThrough {
+  text-decoration: line-through;
+}
+
+.greenFontColor {
+  color: green;
+}
+
+.dot {
+  height: 5px;
+  width: 5px;
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+}
+
+.moreInfoButton {
+  border: none;
+  background-color: transparent;
+  color: red;
+}

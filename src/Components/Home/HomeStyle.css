@@ -1,0 +1,24 @@
+.bikeCategories .ant-descriptions-title {
+  color: #ee3143;
+}
+
+.bikeCategories .ant-descriptions {
+  padding-left: 21px;
+  padding-top: 21px;
+}
+
+.bikeCategories .ant-btn-link {
+  color: black;
+}
+
+.commonHeader .ant-list-header {
+  color: #ee3143;
+  border-bottom: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.locationContainer.ant-list {
+  padding-left: 21px;
+  padding-top: 21px;
+}

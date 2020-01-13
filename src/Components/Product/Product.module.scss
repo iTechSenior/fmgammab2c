@@ -1,0 +1,44 @@
+.adsHeaderBanner {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.adsHeaderImage {
+  flex: 1;
+  min-width: 270px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+
+  @media (max-width: 615px) {
+    margin-right: 0;
+  }
+}
+
+.filterPanel {
+  background-color: white;
+}
+
+.mainViewContainer {
+  padding-top: 40px;
+  @media (max-width: 768px) {
+    padding-top: 10px;
+  }
+}
+
+.colHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 70px;
+  @media (max-width: 576px) {
+    height: 60px;
+  }
+}
+
+.bikesGridViewHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

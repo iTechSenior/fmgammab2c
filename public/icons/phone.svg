@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61.1 (89650) - https://sketch.com -->
+    <title>phone</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect x="91" y="21" width="18" height="18" id="rect-1"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="FM---Home-" transform="translate(-92.000000, -22.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="1440" height="179"></rect>
+            <g id="phone">
+                <image x="91" y="21" width="18" height="18" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGOfPtRkwAAArxJREFUaAXtmcurTVEcx49nHrfIRVHKRB7dUtyUx4CilGKMUoSJDA38AzIwdUeGUjKQJCNKMqBbSB55lmdKSfJ+fr6XrX13a+2zzm+vffYq51ffc/Zev8f6ftdee629z2m1etYbgf97BMZ45I+jfQGY6vHnm+9y8jHf0PTxagg8B78CcY04CU7GnsIklHwWt6wp9mMdHc9ytLVrmtkuoC6/S8BrQ2eLDTlRUlwCnhgqrzPkRElxCXhkqLyWnPGGvMopLgEPDVWnkbPKkFc5xSXgnrHqJmNe9LQ5VMyWx06+b0dnUqGgrkIn5LPYhRX6NKW6ppAKXTRVa7UWGfOip62nYjaqod/3yZkSnYmxoJ5ttKGFkn9LbGObmU/jUKCAD8TpATA5WwqjdlfgMzEbk2OeI6Sb2SfiK77NudgkD0XQJ2AYn++FKBkxWmZvlojYngzTEiJlS+ob8uaX5CbjOgsT31S6ha8vGaYeItphteL4RJzC18j9EPoyrqnyBWwALltC4ydwxeVMpU039AXguwo/8e1OhayPxzwcemzwifiOb48vOZX2LRARUZ8ItR8CviddXP9sMkfHwStwDKwBodOaULvtJ7VMgHznwPSSLmbguwyKdd7Rdh5oEHaClaAfRLcjVCx2XjzXI/aAo2cRuh6Qn6/3mPio7xuaIicDSGh1OggmAJl+BLsB8uRCj8+oQEwTqRMghMAD4nYBK3n1MQyim266oyBERNWYWgRkI7KPg281C6lVgISsAHdqFFG7AImYBA6DdnuFZTp1RYBEyLQpxb4aXRUgEVpqd4AXwDLixZyuC4D3iOm/Nu0FL0GRVCfnjQkYUcHHRLANXAI/QCfkFasfGZKxuTDZC06D9yBEzAHiRlkjb1GjGPw50ZUZBMuB/jAcALOBHvj6gFa0q2AreAZ61huB3gj8HYHfOLjKcFkfcEMAAAAASUVORK5CYII="></image>
+                <use fill="#EE3143" fill-rule="evenodd" xlink:href="#rect-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

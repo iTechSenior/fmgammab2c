@@ -1,0 +1,27 @@
+.container {
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-right: auto;
+  margin-left: auto;
+
+  @media (max-width: 576px) {
+    padding: 0 25px;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 970px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  @media (min-width: 1200px) {
+    max-width: 1170px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  @media (min-width: 1500px) {
+    max-width: 1480px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

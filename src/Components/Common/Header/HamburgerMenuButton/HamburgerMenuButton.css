@@ -1,0 +1,22 @@
+.hamMenuBtnLine_default_first {
+  height: 2px;
+  width: 20px;
+  background: white;
+  transition: all 0.2s ease;
+  margin-bottom: 5px;
+}
+
+.hamMenuBtnLine_default_second {
+  height: 2px;
+  width: 20px;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.hamMenuBtnLine_default_third {
+  height: 2px;
+  width: 20px;
+  background: white;
+  transition: all 0.2s ease;
+  margin-top: 5px;
+}
