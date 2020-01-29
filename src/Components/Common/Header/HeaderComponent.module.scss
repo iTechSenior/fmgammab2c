@@ -5,7 +5,7 @@
 }
 
 .contactIconWrapper {
-  @media (min-width: 755px) {
+  @media (min-width: 803px) {
     display: none;
   }
 }
@@ -29,14 +29,11 @@
 .menuButtonWrapper {
   display: 'flex';
   flex-direction: 'row';
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   color: 'white';
   font-size: 18px;
-  @media (max-width: 810px) {
-    font-size: 14px;
-  }
-  @media (max-width: 755px) {
+  @media (max-width: 803px) {
     display: none;
   }
 }

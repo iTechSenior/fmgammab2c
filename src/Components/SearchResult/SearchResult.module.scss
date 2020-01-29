@@ -1,0 +1,17 @@
+.mainViewContainer {
+  padding-top: 60px;
+  @media (max-width: 768px) {
+    padding-top: 40px;
+  }
+}
+
+.pageHeaderText {
+  height: 70px;
+  color: red;
+  font-size: 28px;
+  font-weight: 600;
+  @media (max-width: 576px) {
+    height: 60px;
+    font-size: 24px;
+  }
+}

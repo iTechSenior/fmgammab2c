@@ -18,7 +18,7 @@ export default function FeedBackComponent() {
         }}
         type="link"
         onClick={() => setModalVisibility(true)}
-      ></Button>
+      />
 
       <Modal
         className={FeedBackComponentStyle.modalContainer}

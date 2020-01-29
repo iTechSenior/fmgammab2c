@@ -6,7 +6,6 @@ import { Col, Row } from 'antd'
 import FooterComponent from './Components/Common/Footer/FooterComponent'
 import NotFound from './Components/NotFound/NotFound'
 import './App.css'
-import * as AppStyle from './App.module.scss'
 
 function App() {
   const routeResult = useRoutes(Routes)

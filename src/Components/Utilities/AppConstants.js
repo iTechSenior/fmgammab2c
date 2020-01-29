@@ -5,17 +5,61 @@ export const accessories = 'Accessoires'
 
 export const bikesCategories = {
   eBike: 'E-Bikes',
-  sportBike: 'Sportfietsen',
+  raceBike: 'Racefietsen',
   cityBike: 'Stadsfietsen',
+  vouwBike: 'Vouwfiets',
   mountainBike: 'Mountainbikes',
+  accessoires: 'Accessoires',
+}
+
+export const filterOptions = {
+  Type: {
+    name: 'type',
+    title: 'Type',
+    options: [
+      'Pompen',
+      'Sloten',
+      'Helmen',
+      'Tassen',
+      'Hand-muts-voet',
+      'Regenbroeken',
+      'Jassen',
+      'Battcovers',
+      'Kind',
+      'Pedalen',
+      'Gps',
+    ],
+  },
+  Speed: {
+    name: 'speed',
+    title: 'Snelheid',
+    options: ['45 km/u', '25 km/u'],
+  },
+  Brand: {
+    name: 'brand',
+    title: 'Merk',
+    options: ['Scott', 'Koga', 'Bizobike', 'Gazelle'],
+  },
+  Price: {
+    name: 'price',
+    title: 'Prijs',
+    options: ['minPrice', 'maxPrice'],
+  },
+  Usage: {
+    name: 'usage',
+    title: 'Gebruik',
+    options: ['Woon-werk', 'Hobby', 'Pro', 'Vrije tijd'],
+  },
 }
 
 //End Labels Naming Section
 
 // Env Constants
-
 export const frontEndEnvURL = process.env.PUBLIC_URL
-export const backEndEnvURL = 'http://localhost:3000/'
+export const backEndEnvURL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000'
+    : 'https://voorstel-fietsenmintjensb2b.be'
 
 //End Env Constants
 
@@ -23,18 +67,16 @@ export const backEndEnvURL = 'http://localhost:3000/'
 export const eBikeImage = () => {
   return (
     <img
-      style={{ width: '45px', height: '30px' }}
-      src={`${frontEndEnvURL}/icons/Bikes/ebike.png`}
+      src={`${frontEndEnvURL}/icons/Bikes/eBike.png`}
       alt={'E-Bike  Not Found'}
     />
   )
 }
 
-export const sportBikeImage = () => {
+export const raceBikeImage = () => {
   return (
     <img
-      style={{ width: '45px', height: '30px' }}
-      src={`${frontEndEnvURL}/icons/Bikes/sportBike.png`}
+      src={`${frontEndEnvURL}/icons/Bikes/raceBike.png`}
       alt={'Sport Bike  Not Found'}
     />
   )
@@ -43,7 +85,6 @@ export const sportBikeImage = () => {
 export const cityBikeImage = () => {
   return (
     <img
-      style={{ width: '45px', height: '30px' }}
       src={`${frontEndEnvURL}/icons/Bikes/cityBike.png`}
       alt={'City Bike  Not Found'}
     />
@@ -53,8 +94,16 @@ export const cityBikeImage = () => {
 export const mountainBikeImage = () => {
   return (
     <img
-      style={{ width: '45px', height: '30px' }}
       src={`${frontEndEnvURL}/icons/Bikes/mountainBike.png`}
+      alt={'City Bike  Not Found'}
+    />
+  )
+}
+
+export const vouwBikeImage = () => {
+  return (
+    <img
+      src={`${frontEndEnvURL}/icons/Bikes/vouwBike.png`}
       alt={'City Bike  Not Found'}
     />
   )
@@ -63,7 +112,6 @@ export const mountainBikeImage = () => {
 export const accessoriesImage = () => {
   return (
     <img
-      style={{ width: '45px', height: '30px' }}
       src={`${frontEndEnvURL}/icons/Bikes/accessories.png`}
       alt={'City Bike  Not Found'}
     />

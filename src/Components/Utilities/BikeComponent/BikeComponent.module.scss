@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: flex-start;
   margin: 0 auto;
+  background-color: white;
 }
 
 .redFontColor {
@@ -28,4 +29,19 @@
   border: none;
   background-color: transparent;
   color: red;
+}
+
+.descriptionWrapper {
+  width: 100%;
+  display: flex;
+  padding-right: 20px;
+  padding-left: 10px;
+
+  p {
+    width: 100%;
+    color: black;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }

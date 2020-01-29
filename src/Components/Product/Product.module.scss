@@ -15,14 +15,38 @@
   }
 }
 
+.filterViewsRow {
+  @media (max-width: 576px) {
+    display: none;
+  }
+}
+
+.filterPanelForMobile {
+  height: 748px;
+  margin-top: 5px;
+  transition: height 0.3s ease;
+  background-color: white;
+}
+
 .filterPanel {
   background-color: white;
 }
 
 .mainViewContainer {
   padding-top: 40px;
-  @media (max-width: 768px) {
+  @media (max-width: 803px) {
     padding-top: 10px;
+  }
+}
+
+.filterMenuBar {
+  padding: 10px;
+  background-color: white;
+  // border: 1px solid #d9d9d9;
+  // border-radius: 5px;
+  box-shadow: 1px 4px 2px -2px #d9d9d9;
+  @media (min-width: 576px) {
+    display: none;
   }
 }
 

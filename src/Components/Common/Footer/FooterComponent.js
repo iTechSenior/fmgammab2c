@@ -7,7 +7,7 @@ import AppStyle from '../../../App.module.scss'
 import DateTextInformationComponent from '../../Utilities/DateTextInformationComponent/DateTextInformationComponent'
 
 export default function FooterComponent() {
-  const [dateInformationArray, setDateInformationArray] = useState([
+  const [dateInformationArray] = useState([
     {
       date: '14/11',
       text: 'Info sessie Belsele',

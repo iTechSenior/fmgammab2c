@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, List, Row } from 'antd'
+import { Col, List, Row, Button } from 'antd'
 import Container from '../Container/ContainerComponent'
 import { frontEndEnvURL } from '../../Utilities/AppConstants'
 import './MenuBarDropDownStyle.css'
@@ -13,6 +13,11 @@ export default function MenuBarDropDownComponent(props) {
       animation: '1s appear forwards',
     },
   }
+
+  const onDropDownMenuItemClick = (header, text) => {
+    props.onMenuItemClick(header, text)
+  }
+
   return (
     <div className={'dropDownContainer'} style={styles.mainWrapperStyle}>
       <Container>
@@ -33,7 +38,18 @@ export default function MenuBarDropDownComponent(props) {
                       dataSource={listItem.data}
                       renderItem={item => (
                         <List.Item>
-                          <div>{item.text}</div>
+                          <Button
+                            type="link"
+                            onClick={() =>
+                              onDropDownMenuItemClick(
+                                listItem.filter,
+                                item.text
+                              )
+                            }
+                            style={{ color: 'rgba(0, 0, 0, 0.65)' }}
+                          >
+                            {item.text}
+                          </Button>
                         </List.Item>
                       )}
                     />
@@ -47,6 +63,7 @@ export default function MenuBarDropDownComponent(props) {
               <img
                 className={MenuBarDropDownStyle.menuBarImage}
                 src={`${frontEndEnvURL}/icons/dropdownImage.png`}
+                alt="Dropdown menu bar"
               />
             </div>
           </Col>

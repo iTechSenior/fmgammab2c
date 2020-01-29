@@ -1,5 +1,4 @@
 import React from 'react'
-import { Icon } from 'antd'
 import './ContactView.css'
 
 const ContactView = () => {

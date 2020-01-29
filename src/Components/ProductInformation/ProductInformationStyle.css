@@ -19,3 +19,8 @@
 .ant-btn-circle-outline {
   min-width: 0;
 }
+
+.carousel .thumb.selected,
+.carousel .thumb:hover {
+  border: 3px solid #ee3143;
+}

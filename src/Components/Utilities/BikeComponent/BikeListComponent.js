@@ -7,15 +7,7 @@ export default function BikeListComponent(props) {
   return (
     <List
       className={'bikesList'}
-      grid={{
-        gutter: 16,
-        xs: 1,
-        sm: 2,
-        md: 2,
-        lg: 2,
-        xl: 3,
-        xxl: 3,
-      }}
+      grid={props.gridStyle}
       dataSource={props.bikeData}
       renderItem={(item, index) => {
         if (item.ads) {
@@ -37,7 +29,12 @@ export default function BikeListComponent(props) {
         }
         return (
           <List.Item>
-            {<BikeComponent bikeData={props.bikeData[index]} />}
+            {
+              <BikeComponent
+                bikeData={props.bikeData[index]}
+                onMoreInfoBtnClick={props.onMoreInfoBtnClick}
+              />
+            }
           </List.Item>
         )
       }}

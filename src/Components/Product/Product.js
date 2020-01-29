@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Breadcrumb,
   Checkbox,
@@ -8,191 +8,121 @@ import {
   Row,
   Button,
 } from 'antd'
+import { navigate, useQueryParams } from 'hookrouter'
+import _ from 'lodash'
+import debounce from 'lodash/debounce'
+import * as FietsenMintjensAPI from '../../api/FietsenMintjensAPI'
 import * as appConstants from '../Utilities/AppConstants'
-import ImageButtonComponent from '../Utilities/ImageButtonComponent/ImageButtonComponent'
-import BikeListComponent from '../Utilities/BikeComponent/BikeListComponent'
-import { navigate } from 'hookrouter'
-import './Product.css'
-import * as ProductStyle from './Product.module.scss'
-import { useMediaPredicate } from 'react-media-hook'
 
 import Container from '../Common/Container/ContainerComponent'
+import ImageButtonComponent from '../Utilities/ImageButtonComponent/ImageButtonComponent'
+import BikeListComponent from '../Utilities/BikeComponent/BikeListComponent'
+
+import './Product.css'
+import * as ProductStyle from './Product.module.scss'
 
 export default function Product(props) {
   // This what the api should at least respond with
 
-  const isSmallScreenForMobile = useMediaPredicate('(max-width: 410px)')
+  const [productsData, setProductsData] = useState([])
+  const [state, setState] = useState({})
+  const [queryParams] = useQueryParams()
 
-  const bikeListInformation = [
-    {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 1',
-      price: '999,00',
-      availability: 'op voorraad',
-      description: [
-        {
-          title: 'Snelheid van 25km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
+  const bikeCompGridStyle = {
+    gutter: 16,
+    xs: 1,
+    sm: 2,
+    md: 2,
+    lg: 2,
+    xl: 3,
+    xxl: 3,
+  }
+
+  useEffect(() => {
+    FietsenMintjensAPI.getProductsByCategory(props.productCategory, state)
+      .then(res => {
+        if (!_.isEqual(productsData, res.data)) {
+          setProductsData(res.data)
+        }
+      })
+      .catch(fail => console.log(fail))
+  })
+
+  useEffect(() => {
+    const { prevQueryParams } = state
+    if (queryParams.key && !_.isEqual(prevQueryParams, queryParams)) {
+      setState({
+        ...state,
+        [queryParams.key]: [queryParams.value],
+        prevQueryParams: queryParams,
+      })
+    }
+  })
+
+  const [filterPanelVisible, setFilterPanelVisible] = useState(false)
+
+  const styles = {
+    filterSnelheidOptionPanel: {
+      opacity: 0,
+      animation: '1s appear forwards',
+      animationDelay: '0.1s',
     },
-    {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 2',
-      price: '999,00',
-      availability: 'op voorraad',
-      description: [
-        {
-          title: 'Snelheid van 25km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
+    filterMerkOptionPanel: {
+      opacity: 0,
+      animation: '1s appear forwards',
+      animationDelay: '0.2s',
     },
-    {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 3',
-      price: '999,00',
-      availability: 'op voorraad',
-      description: [
-        {
-          title: 'Snelheid van 25km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
+    filterPrijsOptionPanel: {
+      opacity: 0,
+      animation: '1s appear forwards',
+      animationDelay: '0.3s',
     },
-    {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 4.',
-      price: '999,00',
-      availability: 'geen voorraad meer',
-      description: [
-        {
-          title: 'Snelheid van 25km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
+    filterGebruikOptionPanel: {
+      opacity: 0,
+      animation: '1s appear forwards',
+      animationDelay: '0.4s',
     },
-    {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 3',
-      price: '999,00',
-      availability: 'op voorraad',
-      description: [
-        {
-          title: 'Snelheid van 25km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
-    },
-    {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 3',
-      price: '999,00',
-      availability: 'op voorraad',
-      description: [
-        {
-          title: 'Snelheid van 25km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
-    },
-    {
-      ads: true,
-      width: '305px',
-      headerText: 'WELKE FIETS IS PERFECT VOOR JOU?',
-      descriptionText: 'Sportief, functioneel of stijlvol?',
-      buttonText: 'Help mij kiezen',
-      imgBackgroundColor: '#EE3143',
-      buttonTextColor: '#EE3143',
-    },
-    {
-      ads: true,
-      width: '305px',
-      buttonVisibility: 'false',
-      buttonTextColor: '#EE3143',
-      imgSource: 'icons/HomePage/mBikeLogo.png',
-    },
-    {
-      ads: true,
-      width: '305px',
-      buttonVisibility: 'false',
-      buttonTextColor: '#EE3143',
-      imgSource: 'icons/HomePage/mBikeLogo.png',
-    },
-    {
-      ads: true,
-      width: '305px',
-      headerText: 'E-BIKE OF GEEN E-BIKE?',
-      descriptionText: 'That’s the question. ',
-      buttonText: 'Waar moet ik op letten? ',
-      imgBackgroundColor: 'rgba(16, 100, 224, 0.48)',
-      buttonTextColor: '#1064E0',
-    },
-    {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 3',
-      price: '999,00',
-      availability: 'op voorraad',
-      description: [
-        {
-          title: 'Snelheid van 45km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
-    },
-    {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 3',
-      price: '999,00',
-      availability: 'op voorraad',
-      description: [
-        {
-          title: 'Snelheid van 45km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
-    },
-  ]
+  }
+
+  const handleFilterMenuBtnClick = () => {
+    setFilterPanelVisible(!filterPanelVisible)
+  }
+
+  const handleMoreInfoBtnClick = id => {
+    navigate(`/products/${props.productCategory}/${id}`)
+    try {
+      // trying to use new API - https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo
+      window.scroll({
+        top: 0,
+        left: 0,
+      })
+    } catch (error) {
+      // just a fallback for older browsers
+      window.scrollTo(0, 0)
+    }
+  }
+
+  const handleChangeTextDebounce = debounce((str, param) => {
+    setState({ ...state, [param]: str })
+  }, 500)
+
+  const handleCheckBoxChange = (param, value) => e => {
+    let currentValue = state[param]
+
+    if (e.target.checked) {
+      if (!currentValue) {
+        currentValue = [value]
+      } else {
+        currentValue.push(value)
+      }
+    } else {
+      if (currentValue) {
+        const currentIndex = currentValue.findIndex(item => item === value)
+        currentValue.splice(currentIndex, 1)
+      }
+    }
+    setState({ ...state, [param]: currentValue })
+  }
 
   return (
     <Container>
@@ -204,77 +134,445 @@ export default function Product(props) {
           <div className={ProductStyle.colHeader}>
             <Breadcrumb>
               <Breadcrumb.Item
+                href=""
                 onClick={() => {
                   navigate('/')
                 }}
               >
-                <a>Fietsen</a>
+                Fietsen
               </Breadcrumb.Item>
-              <Breadcrumb.Item>{props.productType}</Breadcrumb.Item>
+              <Breadcrumb.Item>{props.productCategory}</Breadcrumb.Item>
             </Breadcrumb>
           </div>
-          <Row gutter={[{ sm: 16, md: 24, lg: 32 }, 20]} type="flex">
-            <Col xs={24} sm={12} md={6} lg={24}>
+          <Row
+            gutter={[{ sm: 16, md: 24, lg: 32 }, 20]}
+            type="flex"
+            className={ProductStyle.filterViewsRow}
+          >
+            {props.productCategory ===
+              appConstants.bikesCategories.accessoires && (
+              <Col xs={24} sm={16} md={16} lg={24}>
+                <div className={ProductStyle.filterPanel}>
+                  <Descriptions
+                    column={{ xs: 1, sm: 2, md: 3, lg: 1 }}
+                    title={appConstants.filterOptions.Type.title}
+                    colon={false}
+                  >
+                    {appConstants.filterOptions.Type.options.map((item, i) => (
+                      <Descriptions.Item
+                        key={i}
+                        label={
+                          <Checkbox
+                            onChange={handleCheckBoxChange(
+                              appConstants.filterOptions.Type.name,
+                              item
+                            )}
+                            checked={
+                              state[appConstants.filterOptions.Type.name]
+                                ? state[
+                                    appConstants.filterOptions.Type.name
+                                  ].findIndex(el => el === item) >= 0
+                                : false
+                            }
+                          />
+                        }
+                      >
+                        {item}
+                      </Descriptions.Item>
+                    ))}
+                  </Descriptions>
+                </div>
+              </Col>
+            )}
+            {props.productCategory === appConstants.bikesCategories.eBike && (
+              <Col xs={24} sm={12} md={6} lg={24}>
+                <div className={ProductStyle.filterPanel}>
+                  <Descriptions
+                    column={1}
+                    title={appConstants.filterOptions.Speed.title}
+                    colon={false}
+                  >
+                    {appConstants.filterOptions.Speed.options.map((item, i) => (
+                      <Descriptions.Item
+                        key={i}
+                        label={
+                          <Checkbox
+                            onChange={handleCheckBoxChange(
+                              appConstants.filterOptions.Speed.name,
+                              item
+                            )}
+                            checked={
+                              state[appConstants.filterOptions.Speed.name]
+                                ? state[
+                                    appConstants.filterOptions.Speed.name
+                                  ].findIndex(el => el === item) >= 0
+                                : false
+                            }
+                          />
+                        }
+                      >
+                        {item}
+                      </Descriptions.Item>
+                    ))}
+                  </Descriptions>
+                </div>
+              </Col>
+            )}
+            {props.productCategory !==
+              appConstants.bikesCategories.accessoires && (
+              <Col
+                xs={24}
+                sm={
+                  props.productCategory === appConstants.bikesCategories.eBike
+                    ? 12
+                    : 8
+                }
+                md={
+                  props.productCategory === appConstants.bikesCategories.eBike
+                    ? 6
+                    : 8
+                }
+                lg={24}
+              >
+                <div className={ProductStyle.filterPanel}>
+                  <Descriptions
+                    column={1}
+                    title={appConstants.filterOptions.Brand.title}
+                    colon={false}
+                  >
+                    {appConstants.filterOptions.Brand.options.map((item, i) => (
+                      <Descriptions.Item
+                        key={i}
+                        label={
+                          <Checkbox
+                            onChange={handleCheckBoxChange(
+                              appConstants.filterOptions.Brand.name,
+                              item
+                            )}
+                            checked={
+                              state[appConstants.filterOptions.Brand.name]
+                                ? state[
+                                    appConstants.filterOptions.Brand.name
+                                  ].findIndex(el => el === item) >= 0
+                                : false
+                            }
+                          />
+                        }
+                      >
+                        {item}
+                      </Descriptions.Item>
+                    ))}
+                  </Descriptions>
+                </div>
+              </Col>
+            )}
+            <Col
+              xs={24}
+              sm={
+                props.productCategory === appConstants.bikesCategories.eBike
+                  ? 12
+                  : 8
+              }
+              md={
+                props.productCategory === appConstants.bikesCategories.eBike
+                  ? 6
+                  : 8
+              }
+              lg={24}
+            >
               <div className={ProductStyle.filterPanel}>
-                <Descriptions column={1} title={'Snelheid'} colon={false}>
-                  <Descriptions.Item label={<Checkbox />}>
-                    45 km/u
-                  </Descriptions.Item>
-                  <Descriptions.Item label={<Checkbox />}>
-                    25 km/u
-                  </Descriptions.Item>
+                <Descriptions
+                  column={1}
+                  title={appConstants.filterOptions.Price.title}
+                  colon={false}
+                >
+                  {appConstants.filterOptions.Price.options.map((item, i) => (
+                    <Descriptions.Item
+                      key={i}
+                      label={
+                        <Input
+                          placeholder={
+                            item === 'minPrice' ? '€. Min' : '€. Max'
+                          }
+                          onChange={e =>
+                            handleChangeTextDebounce(e.target.value, item)
+                          }
+                        />
+                      }
+                      className="descriptionInput"
+                    />
+                  ))}
                 </Descriptions>
               </div>
             </Col>
-            <Col xs={24} sm={12} md={6} lg={24}>
-              <div className={ProductStyle.filterPanel}>
-                <Descriptions column={1} title={'Merk'} colon={false}>
-                  <Descriptions.Item label={<Checkbox />}>
-                    Scott
-                  </Descriptions.Item>
-                  <Descriptions.Item label={<Checkbox />}>
-                    Koga
-                  </Descriptions.Item>
-                  <Descriptions.Item label={<Checkbox />}>
-                    Bizobike
-                  </Descriptions.Item>
-                  <Descriptions.Item label={<Checkbox />}>
-                    Gazelle
-                  </Descriptions.Item>
-                </Descriptions>
-              </div>
+            {props.productCategory !==
+              appConstants.bikesCategories.accessoires && (
+              <Col
+                xs={24}
+                sm={
+                  props.productCategory === appConstants.bikesCategories.eBike
+                    ? 12
+                    : 8
+                }
+                md={
+                  props.productCategory === appConstants.bikesCategories.eBike
+                    ? 6
+                    : 8
+                }
+                lg={24}
+              >
+                <div className={ProductStyle.filterPanel}>
+                  <Descriptions
+                    column={1}
+                    title={appConstants.filterOptions.Usage.title}
+                    colon={false}
+                  >
+                    {appConstants.filterOptions.Usage.options.map((item, i) => (
+                      <Descriptions.Item
+                        key={i}
+                        label={
+                          <Checkbox
+                            onChange={handleCheckBoxChange(
+                              appConstants.filterOptions.Usage.name,
+                              item
+                            )}
+                            checked={
+                              state[appConstants.filterOptions.Usage.name]
+                                ? state[
+                                    appConstants.filterOptions.Usage.name
+                                  ].findIndex(el => el === item) >= 0
+                                : false
+                            }
+                          />
+                        }
+                      >
+                        {item}
+                      </Descriptions.Item>
+                    ))}
+                  </Descriptions>
+                </div>
+              </Col>
+            )}
+          </Row>
+          <Row className={ProductStyle.filterMenuBar}>
+            <Col
+              span={24}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <span style={{ color: 'red' }}>FILTEREN</span>
+              <Button
+                type="danger"
+                icon="filter"
+                style={{ color: 'white' }}
+                onClick={() => handleFilterMenuBtnClick()}
+              />
             </Col>
-            <Col xs={24} sm={12} md={6} lg={24}>
-              <div className={ProductStyle.filterPanel}>
-                <Descriptions column={1} title={'Prijs'} colon={false}>
-                  <Descriptions.Item
-                    label={<Input placeholder="€. Min" />}
-                    className="descriptionInput"
-                  />
-                  <Descriptions.Item
-                    label={<Input placeholder="€. Max" />}
-                    className="descriptionInput"
-                  />
-                </Descriptions>
-              </div>
-            </Col>
-            <Col xs={24} sm={12} md={6} lg={24}>
-              <div className={ProductStyle.filterPanel}>
-                <Descriptions column={1} title={'Gebruik'} colon={false}>
-                  <Descriptions.Item label={<Checkbox />}>
-                    Woon-werk
-                  </Descriptions.Item>
-                  <Descriptions.Item label={<Checkbox />}>
-                    Hobby
-                  </Descriptions.Item>
-                  <Descriptions.Item label={<Checkbox />}>
-                    Pro
-                  </Descriptions.Item>
-                  <Descriptions.Item label={<Checkbox />}>
-                    Vrije tijd
-                  </Descriptions.Item>
-                </Descriptions>
-              </div>
+          </Row>
+          <Row className={'filterPanelForMobileRow'}>
+            <Col
+              className={ProductStyle.filterPanelForMobile}
+              span={24}
+              style={{
+                height: filterPanelVisible
+                  ? props.productCategory === appConstants.bikesCategories.eBike
+                    ? 748
+                    : props.productCategory ===
+                      appConstants.bikesCategories.accessoires
+                    ? 670
+                    : 615
+                  : 0,
+              }}
+            >
+              {filterPanelVisible && (
+                <React.Fragment>
+                  {props.productCategory ===
+                    appConstants.bikesCategories.accessoires && (
+                    <div
+                      className={ProductStyle.filterPanel}
+                      style={styles.filterSnelheidOptionPanel}
+                    >
+                      <Descriptions
+                        column={{ xs: 1, sm: 2, md: 3, lg: 1 }}
+                        title={appConstants.filterOptions.Type.title}
+                        colon={false}
+                      >
+                        {appConstants.filterOptions.Type.options.map(
+                          (item, i) => (
+                            <Descriptions.Item
+                              key={i}
+                              label={
+                                <Checkbox
+                                  onChange={handleCheckBoxChange(
+                                    appConstants.filterOptions.Type.title,
+                                    item
+                                  )}
+                                  checked={
+                                    state[appConstants.filterOptions.Type.name]
+                                      ? state[
+                                          appConstants.filterOptions.Type.name
+                                        ].findIndex(el => el === item) >= 0
+                                      : false
+                                  }
+                                />
+                              }
+                            >
+                              {item}
+                            </Descriptions.Item>
+                          )
+                        )}
+                      </Descriptions>
+                    </div>
+                  )}
+                  {props.productCategory ===
+                    appConstants.bikesCategories.eBike && (
+                    <div
+                      className={ProductStyle.filterPanel}
+                      style={styles.filterSnelheidOptionPanel}
+                    >
+                      <Descriptions
+                        column={1}
+                        title={appConstants.filterOptions.Speed.title}
+                        colon={false}
+                      >
+                        {appConstants.filterOptions.Speed.options.map(
+                          (item, i) => (
+                            <Descriptions.Item
+                              key={i}
+                              label={
+                                <Checkbox
+                                  onChange={handleCheckBoxChange(
+                                    appConstants.filterOptions.Speed.name,
+                                    item
+                                  )}
+                                  checked={
+                                    state[appConstants.filterOptions.Speed.name]
+                                      ? state[
+                                          appConstants.filterOptions.Speed.name
+                                        ].findIndex(el => el === item) >= 0
+                                      : false
+                                  }
+                                />
+                              }
+                            >
+                              {item}
+                            </Descriptions.Item>
+                          )
+                        )}
+                      </Descriptions>
+                    </div>
+                  )}
+                  {props.productCategory !==
+                    appConstants.bikesCategories.accessoires && (
+                    <div
+                      className={ProductStyle.filterPanel}
+                      style={styles.filterMerkOptionPanel}
+                    >
+                      <Descriptions
+                        column={1}
+                        title={appConstants.filterOptions.Brand.title}
+                        colon={false}
+                      >
+                        {appConstants.filterOptions.Brand.options.map(
+                          (item, i) => (
+                            <Descriptions.Item
+                              key={i}
+                              label={
+                                <Checkbox
+                                  onChange={handleCheckBoxChange(
+                                    appConstants.filterOptions.Brand.name,
+                                    item
+                                  )}
+                                  checked={
+                                    state[appConstants.filterOptions.Brand.name]
+                                      ? state[
+                                          appConstants.filterOptions.Brand.name
+                                        ].findIndex(el => el === item) >= 0
+                                      : false
+                                  }
+                                />
+                              }
+                            >
+                              {item}
+                            </Descriptions.Item>
+                          )
+                        )}
+                      </Descriptions>
+                    </div>
+                  )}
+
+                  <div
+                    className={ProductStyle.filterPanel}
+                    style={styles.filterPrijsOptionPanel}
+                  >
+                    <Descriptions
+                      column={1}
+                      title={appConstants.filterOptions.Price.title}
+                      colon={false}
+                    >
+                      {appConstants.filterOptions.Price.options.map(
+                        (item, i) => (
+                          <Descriptions.Item
+                            key={i}
+                            label={
+                              <Input
+                                placeholder={
+                                  item === 'minPrice' ? '€. Min' : '€. Max'
+                                }
+                                onChange={e =>
+                                  handleChangeTextDebounce(e.target.value, item)
+                                }
+                              />
+                            }
+                            className="descriptionInput"
+                          />
+                        )
+                      )}
+                    </Descriptions>
+                  </div>
+                  {props.productCategory !==
+                    appConstants.bikesCategories.accessoires && (
+                    <div
+                      className={ProductStyle.filterPanel}
+                      style={styles.filterGebruikOptionPanel}
+                    >
+                      <Descriptions
+                        column={1}
+                        title={appConstants.filterOptions.Usage.title}
+                        colon={false}
+                      >
+                        {appConstants.filterOptions.Usage.options.map(
+                          (item, i) => (
+                            <Descriptions.Item
+                              key={i}
+                              label={
+                                <Checkbox
+                                  onChange={handleCheckBoxChange(
+                                    appConstants.filterOptions.Usage.name,
+                                    item
+                                  )}
+                                  checked={
+                                    state[appConstants.filterOptions.Usage.name]
+                                      ? state[
+                                          appConstants.filterOptions.Usage.name
+                                        ].findIndex(el => el === item) >= 0
+                                      : false
+                                  }
+                                />
+                              }
+                            >
+                              {item}
+                            </Descriptions.Item>
+                          )
+                        )}
+                      </Descriptions>
+                    </div>
+                  )}
+                </React.Fragment>
+              )}
             </Col>
           </Row>
         </Col>
@@ -282,9 +580,9 @@ export default function Product(props) {
           <div className={ProductStyle.colHeader}>
             <div className={ProductStyle.bikesGridViewHeader}>
               <span style={{ color: 'red', fontSize: '20px' }}>
-                Onze {props.productType}
+                Onze {props.productCategory}
               </span>
-              <Button>
+              {/* <Button>
                 <img
                   style={{
                     width: '18px',
@@ -295,7 +593,7 @@ export default function Product(props) {
                   alt={'Sort the result'}
                 />
                 {isSmallScreenForMobile ? '' : 'Sorteer resultaten'}
-              </Button>
+              </Button> */}
             </div>
           </div>
           <Row type="flex">
@@ -336,7 +634,11 @@ export default function Product(props) {
             justify="space-between"
           >
             <Col span={24}>
-              <BikeListComponent bikeData={bikeListInformation} />
+              <BikeListComponent
+                gridStyle={bikeCompGridStyle}
+                onMoreInfoBtnClick={id => handleMoreInfoBtnClick(id)}
+                bikeData={productsData}
+              />
             </Col>
           </Row>
         </Col>

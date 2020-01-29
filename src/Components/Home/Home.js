@@ -1,20 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { navigate, useQueryParams } from 'hookrouter'
 import { Button, Col, Descriptions, Icon, List, Row } from 'antd'
-import Container from '../Common/Container/ContainerComponent'
-import './HomeStyle.css'
-import * as HomeStyle from './Home.module.scss'
+import _ from 'lodash'
 import * as appConstants from '../Utilities/AppConstants'
+import * as FietsenMintjensAPI from '../../api/FietsenMintjensAPI'
+
+import Container from '../Common/Container/ContainerComponent'
 import ImageButtonComponent from '../Utilities/ImageButtonComponent/ImageButtonComponent'
 import BikeListComponent from '../Utilities/BikeComponent/BikeListComponent'
-import { navigate } from 'hookrouter'
+
+import * as HomeStyle from './Home.module.scss'
+import './HomeStyle.css'
 
 export default function Home() {
-  /*    useEffect(()=>{
-            // Testing API Request
-            FietsenMintjensAPI.loginAsAdmin();
-            FietsenMintjensAPI.getBikeCategories('e-bikes').then((res)=>{
-            }).catch((fail=>console.log(fail)));
-        },);*/
+  const [productsData, setProductsData] = useState()
+
+  useEffect(() => {
+    FietsenMintjensAPI.getProducts()
+      .then(res => {
+        if (!_.isEqual(productsData, res.data)) {
+          setProductsData(res.data)
+        }
+        console.log(res.data)
+      })
+      .catch(err => console.log(err))
+  })
+
+  const [queryParams, setQueryParams] = useQueryParams()
 
   const gridListStyle = {
     gutter: 16,
@@ -25,144 +37,129 @@ export default function Home() {
     xl: 2,
     xxl: 2,
   }
+
+  const bikeCompGridStyle = {
+    gutter: 16,
+    xs: 1,
+    sm: 2,
+    md: 2,
+    lg: 2,
+    xl: 3,
+    xxl: 3,
+  }
   const bikeListInformation = [
     {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 1',
+      id: 1,
+      productType: 'E-Bikes',
+      image: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
+      name: 'Gazelle 1',
       price: '999,00',
       availability: 'op voorraad',
-      description: [
-        {
-          title: 'Snelheid van 25km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
+      usps: ['Snelheid van 25km/u', 'Motorpositie: Midden', 'Versnellingen: 5'],
     },
     {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 2',
+      id: 2,
+      productType: 'E-Bikes',
+      image: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
+      name: 'Gazelle 2',
       price: '999,00',
       availability: 'op voorraad',
-      description: [
-        {
-          title: 'Snelheid van 25km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
+      usps: ['Snelheid van 25km/u', 'Motorpositie: Midden', 'Versnellingen: 5'],
     },
     {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 3',
+      id: 3,
+      productType: 'E-Bikes',
+      image: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
+      name: 'Gazelle 3',
       price: '999,00',
       availability: 'op voorraad',
-      description: [
-        {
-          title: 'Snelheid van 25km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
+      usps: ['Snelheid van 25km/u', 'Motorpositie: Midden', 'Versnellingen: 5'],
     },
     {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 4.',
+      id: 4,
+      productType: 'E-Bikes',
+      image: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
+      name: 'Gazelle 4.',
       price: '999,00',
       availability: 'geen voorraad meer',
-      description: [
-        {
-          title: 'Snelheid van 25km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
+      usps: ['Snelheid van 25km/u', 'Motorpositie: Midden', 'Versnellingen: 5'],
     },
     {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 5',
+      id: 5,
+      productType: 'E-Bikes',
+      image: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
+      name: 'Gazelle 5',
       price: '999,00',
       availability: 'op voorraad',
-      description: [
-        {
-          title: 'Snelheid van 25km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
+      usps: ['Snelheid van 25km/u', 'Motorpositie: Midden', 'Versnellingen: 5'],
     },
     {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 6',
+      id: 6,
+      productType: 'E-Bikes',
+      image: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
+      name: 'Gazelle 6',
       price: '999,00',
       availability: 'op voorraad',
-      description: [
-        {
-          title: 'Snelheid van 25km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
+      usps: ['Snelheid van 25km/u', 'Motorpositie: Midden', 'Versnellingen: 5'],
     },
     {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 7',
+      id: 7,
+      productType: 'E-Bikes',
+      image: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
+      name: 'Gazelle 7',
       price: '999,00',
       availability: 'op voorraad',
-      description: [
-        {
-          title: 'Snelheid van 45km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
+      usps: ['Snelheid van 45km/u', 'Motorpositie: Midden', 'Versnellingen: 5'],
     },
     {
-      imgSource: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
-      bikeName: 'Gazelle 8',
+      id: 8,
+      productType: 'E-Bikes',
+      image: `${appConstants.frontEndEnvURL}/icons/HomePage/bikeExample.png`,
+      name: 'Gazelle 8',
       price: '999,00',
       availability: 'op voorraad',
-      description: [
-        {
-          title: 'Snelheid van 45km/u',
-        },
-        {
-          title: 'Motorpositie: Midden',
-        },
-        {
-          title: 'Versnellingen: 5',
-        },
-      ],
+      usps: ['Snelheid van 45km/u', 'Motorpositie: Midden', 'Versnellingen: 5'],
     },
   ]
+
+  const handleMoreInfoBtnClick = id => {
+    const selectedBikeData = productsData.find(item => item._id === id)
+    let productCategory
+    if (selectedBikeData.categories[0] === 'accessoires') {
+      productCategory = appConstants.bikesCategories.accessoires
+    } else if (selectedBikeData.categories[0] === 'fietsen') {
+      productCategory =
+        selectedBikeData.categories[1] === 'e-bikes'
+          ? selectedBikeData.categories[1].charAt(0).toUpperCase() +
+            '-' +
+            selectedBikeData.categories[1].charAt(2).toUpperCase() +
+            selectedBikeData.categories[1].slice(3)
+          : selectedBikeData.categories[1].charAt(0).toUpperCase() +
+            selectedBikeData.categories[1].slice(1)
+    }
+    navigate(`/products/${productCategory}/${id}`)
+    try {
+      // trying to use new API - https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo
+      window.scroll({
+        top: 0,
+        left: 0,
+      })
+    } catch (error) {
+      // just a fallback for older browsers
+      window.scrollTo(0, 0)
+    }
+  }
+
+  const navigateToProductScreenByCategory = category => {
+    setQueryParams({}, true)
+    navigate(`/products/${category}`)
+  }
+
+  const onBrandItemClick = text => {
+    setQueryParams({ key: 'brand', value: text }, true)
+    navigate(`/products/${appConstants.bikesCategories.eBike}`, false)
+  }
+
   return (
     <Container>
       <Row
@@ -177,66 +174,115 @@ export default function Home() {
               colon={false}
             >
               <Descriptions.Item
-                label={<Icon component={appConstants.eBikeImage} />}
+                label={
+                  <Icon
+                    className={HomeStyle.categoryIcon}
+                    component={appConstants.eBikeImage}
+                  />
+                }
               >
                 <Button
-                  onClick={() => {
-                    navigate(`/products/${appConstants.bikesCategories.eBike}`)
-                  }}
+                  onClick={() =>
+                    navigateToProductScreenByCategory(
+                      appConstants.bikesCategories.eBike
+                    )
+                  }
                   type={'link'}
                 >
                   {appConstants.bikesCategories.eBike}
                 </Button>
               </Descriptions.Item>
+
               <Descriptions.Item
-                label={<Icon component={appConstants.eBikeImage} />}
+                label={
+                  <Icon
+                    className={HomeStyle.categoryIcon}
+                    component={appConstants.cityBikeImage}
+                  />
+                }
               >
                 <Button
-                  onClick={() => {
-                    navigate(
-                      `/products/${appConstants.bikesCategories.sportBike}`
+                  onClick={() =>
+                    navigateToProductScreenByCategory(
+                      appConstants.bikesCategories.cityBike
                     )
-                  }}
-                  type={'link'}
-                >
-                  {appConstants.bikesCategories.sportBike}
-                </Button>
-              </Descriptions.Item>
-              <Descriptions.Item
-                label={<Icon component={appConstants.eBikeImage} />}
-              >
-                <Button
-                  onClick={() => {
-                    navigate(
-                      `/products/${appConstants.bikesCategories.cityBike}`
-                    )
-                  }}
+                  }
                   type={'link'}
                 >
                   {appConstants.bikesCategories.cityBike}
                 </Button>
               </Descriptions.Item>
               <Descriptions.Item
-                label={<Icon component={appConstants.eBikeImage} />}
+                label={
+                  <Icon
+                    className={HomeStyle.categoryIcon}
+                    component={appConstants.mountainBikeImage}
+                  />
+                }
               >
                 <Button
-                  onClick={() => {
-                    navigate(
-                      `/products/${appConstants.bikesCategories.mountainBike}`
+                  onClick={() =>
+                    navigateToProductScreenByCategory(
+                      appConstants.bikesCategories.mountainBike
                     )
-                  }}
+                  }
                   type={'link'}
                 >
                   {appConstants.bikesCategories.mountainBike}
                 </Button>
               </Descriptions.Item>
               <Descriptions.Item
-                label={<Icon component={appConstants.eBikeImage} />}
+                label={
+                  <Icon
+                    className={HomeStyle.categoryIcon}
+                    component={appConstants.raceBikeImage}
+                  />
+                }
               >
                 <Button
-                  onClick={() => {
-                    navigate(`/accessories/`)
-                  }}
+                  onClick={() =>
+                    navigateToProductScreenByCategory(
+                      appConstants.bikesCategories.raceBike
+                    )
+                  }
+                  type={'link'}
+                >
+                  {appConstants.bikesCategories.raceBike}
+                </Button>
+              </Descriptions.Item>
+              <Descriptions.Item
+                label={
+                  <Icon
+                    className={HomeStyle.categoryIcon}
+                    component={appConstants.vouwBikeImage}
+                  />
+                }
+              >
+                <Button
+                  onClick={() =>
+                    navigateToProductScreenByCategory(
+                      appConstants.bikesCategories.vouwBike
+                    )
+                  }
+                  type={'link'}
+                >
+                  {appConstants.bikesCategories.vouwBike}
+                </Button>
+              </Descriptions.Item>
+              <Descriptions.Item
+                label={
+                  <Icon
+                    className={HomeStyle.categoryIcon}
+                    component={appConstants.accessoriesImage}
+                  />
+                }
+              >
+                <Button
+                  onClick={() =>
+                    navigateToProductScreenByCategory(
+                      appConstants.bikesCategories.accessoires
+                    )
+                  }
                   type={'link'}
                 >
                   {appConstants.accessories}
@@ -298,14 +344,17 @@ export default function Home() {
                     grid={gridListStyle}
                     className={'popularBrands commonHeader'}
                     dataSource={[
-                      { image: appConstants.gazelleImage },
-                      { image: appConstants.scottImage },
-                      { image: appConstants.stromerImage },
-                      { image: appConstants.cubeImage },
+                      { image: appConstants.gazelleImage, brand: 'Gazelle' },
+                      { image: appConstants.scottImage, brand: 'Scott' },
+                      { image: appConstants.stromerImage, brand: '' },
+                      { image: appConstants.cubeImage, brand: '' },
                     ]}
                     renderItem={item => (
                       <List.Item>
-                        <Icon component={item.image} />
+                        <Icon
+                          component={item.image}
+                          onClick={() => onBrandItemClick(item.brand)}
+                        />
                       </List.Item>
                     )}
                   />
@@ -330,22 +379,28 @@ export default function Home() {
                     }}
                     className={'commonHeader'}
                     dataSource={[
-                      { text: 'Scott (20)' },
-                      { text: 'Gazelle (39)' },
-                      { text: 'Koga (12)' },
-                      { text: 'Stromer (15)' },
-                      { text: 'Scott (20)' },
-                      { text: 'Scott (20)' },
-                      { text: 'Scott (20)' },
-                      { text: 'Scott (20)' },
-                      { text: 'Scott (20)' },
-                      { text: 'Scott (20)' },
-                      { text: 'Scott (20)' },
-                      { text: 'Scott (20)' },
+                      { text: 'Scott' },
+                      { text: 'Gazelle' },
+                      { text: 'Koga' },
+                      { text: 'Stromer' },
+                      { text: 'Scott' },
+                      { text: 'Scott' },
+                      { text: 'Scott' },
+                      { text: 'Scott' },
+                      { text: 'Scott' },
+                      { text: 'Scott' },
+                      { text: 'Scott' },
+                      { text: 'Scott' },
                     ]}
                     renderItem={item => (
                       <List.Item>
-                        <div>{item.text}</div>
+                        <Button
+                          onClick={() => onBrandItemClick(item.text)}
+                          type={'link'}
+                          style={{ color: 'rgba(0, 0, 0, 0.65)' }}
+                        >
+                          {item.text}
+                        </Button>
                       </List.Item>
                     )}
                   />
@@ -355,7 +410,11 @@ export default function Home() {
           </Row>
           <Row gutter={[{ xs: 12, sm: 16, md: 24 }, 20]}>
             <Col span={24}>
-              <BikeListComponent bikeData={bikeListInformation} />
+              <BikeListComponent
+                gridStyle={bikeCompGridStyle}
+                onMoreInfoBtnClick={id => handleMoreInfoBtnClick(id)}
+                bikeData={productsData}
+              />
             </Col>
           </Row>
 
@@ -414,7 +473,7 @@ export default function Home() {
               />
             </Col>
           </Row> */}
-          <Row
+          {/* <Row
             className={'bikeCategories'}
             style={{ paddingTop: '20px', paddingBottom: '20px' }}
           >
@@ -470,7 +529,7 @@ export default function Home() {
                 </Col>
               </Row>
             </Col>
-          </Row>
+          </Row> */}
         </Col>
       </Row>
     </Container>
